@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Htmx where
+module Utils.Htmx where
 
 import Text.Blaze.Internal (attribute, Attribute, AttributeValue)
 

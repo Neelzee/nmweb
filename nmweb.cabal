@@ -11,7 +11,8 @@ common warnings
 
 executable nmweb
     import:           warnings
-    other-modules:    Htmx
+    other-modules:    Handler
+                    , Utils.Htmx
                     , Templates.Root
                     , Templates.Head
                     , Templates.MissingPage

@@ -5,7 +5,7 @@ import Text.Blaze.Html5 as H
 import Text.Blaze.Html5.Attributes as A hiding (method, dir)
 import Templates.Head (head_)
 import Happstack.Server ( toResponse, ok, ServerPart(..), Response(..), nullDir )
-import Htmx ( hxPost, hxSwap )
+import Utils.Htmx ( hxPost, hxSwap )
 
 root :: ServerPart Response
 root = do

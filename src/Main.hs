@@ -12,9 +12,10 @@ import Happstack.Server
   , FromReqURI(..), path, Method(..), method, ServerPart(..), Response(..)
   , BodyPolicy, defaultBodyPolicy, decodeBody
   )
-import Htmx ( hxPost, hxSwap )
-import Templates.Root (root)
-import Templates.MissingPage (missingPage)
+import Utils.Htmx ( hxPost, hxSwap )
+import Templates.Root ( root )
+import Templates.MissingPage ( missingPage )
+import Handler ( handler )
 
 htmxUrl :: AttributeValue
 htmxUrl = "https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"
@@ -25,7 +26,7 @@ conf = nullConf { port = 3000 }
 main :: IO ()
 main = do
   putStrLn $ "Running on port: " ++ show (port conf)
-  simpleHTTP conf $ handlers 
+  simpleHTTP conf $ handler
 
 appTemplate :: String -> [H.Html] -> H.Html -> H.Html
 appTemplate title headers body =
@@ -56,21 +57,3 @@ helloBlaze =
       $ "Click Me"
     )
 
-
-clicked :: ServerPart Response
-clicked = do
-  dir "clicked" $ do
-    method POST
-    ok $ toResponse $ (H.div "Clicked!")
-
-myPolicy :: BodyPolicy
-myPolicy = (defaultBodyPolicy "/tmp/" 0 1000 1000)
-
-handlers :: ServerPart Response
-handlers =
-  do
-    decodeBody myPolicy
-    msum [ clicked
-         , root
-         , missingPage
-         ]
