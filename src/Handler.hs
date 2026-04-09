@@ -1,17 +1,12 @@
 {-# LANGUAGE OverloadedStrings, BlockArguments #-}
 module Handler where
 
-import Control.Monad (msum)
-import Data.Char (toLower)
-import Text.Blaze ((!))
+import Control.Monad ( msum )
 import Text.Blaze.Html5 as H
-import Text.Blaze.Html5.Attributes as A hiding (method, dir)
 import Happstack.Server
-  ( nullConf, simpleHTTP, toResponse, ok, port, Conf, ok, dir, seeOther
-  , FromReqURI(..), path, Method(..), method, ServerPart(..), Response(..)
+  ( toResponse, ok, ok, dir, Method(..), method, ServerPart(..), Response(..)
   , BodyPolicy, defaultBodyPolicy, decodeBody
   )
-import Utils.Htmx ( hxPost, hxSwap )
 import Templates.Root ( root )
 import Templates.MissingPage ( missingPage )
 
